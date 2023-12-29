@@ -10,7 +10,7 @@ def add_10years(date_string):
 
 df = pd.read_csv('/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice.csv')
 
-df['date'] = df['date'].apply(add_10years)
+df['Date'] = df['Date'].apply(add_10years)
 
 df.to_csv('/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice_new.csv', index=False)
 
