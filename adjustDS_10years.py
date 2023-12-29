@@ -1,6 +1,10 @@
 import pandas as pd 
+import os
 from datetime import datetime
 from datetime import timedelta
+
+old_file = '/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice.csv'
+new_file = '/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice_new.csv'
 
 def add_10years(date_string):
    date_obj = datetime.strptime(date_string, '%m/%d/%Y')
@@ -9,20 +13,20 @@ def add_10years(date_string):
 
 
 # Read the CSV file with tab as a delimiter
-df = pd.read_csv('/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice.csv', sep='\t')
+df = pd.read_csv(old_file, sep='\t')
 
 # Print the column names (for debugging)
 #print("Column names:", df.columns.tolist())
-
-#df['Date'] = df['Date'].apply(add_10years)
-
-#df.to_csv('/Users/lorenzocarleo/git/AlgorithmicTrading/stockPrice_new.csv', index=False)
-
-# Print the column names (for debugging)
-print("Column names:", df.columns.tolist())
 
 # Make sure to replace 'Date' with the actual column name from your CSV
 df['Date'] = df['Date'].apply(add_10years)
 
 # Save to a new CSV file
-df.to_csv('updated_dataset.csv', index=False)
+df.to_csv(new_file, index=False)
+
+# Check if the new file has been created
+if os.path.exists(new_file):
+    print(f"File '{os.path.basename(new_file)}' created successfully.")
+else:
+    print(f"Failed to create the file '{os.path.basename(new_file)}'.")
+
